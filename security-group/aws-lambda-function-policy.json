@@ -17,19 +17,16 @@
             ]
         },
         {
-            "Sid": "VisualEditor0",
             "Effect": "Allow",
             "Action": "ec2:DescribeSecurityGroups",
             "Resource": "*"
         },
         {
-            "Sid": "VisualEditor0",
             "Effect": "Allow",
             "Action": "iam:ListAccountAliases",
             "Resource": "*"
         },
         {
-            "Sid": "VisualEditor0",
             "Effect": "Allow",
             "Action": [
                 "ec2:RevokeSecurityGroupIngress",
@@ -38,7 +35,6 @@
             "Resource": "*"
         },
         {
-            "Sid": "VisualEditor0",
             "Effect": "Allow",
             "Action": "sqs:SendMessage",
             "Resource": "arn:aws:sqs:*:*:cloud-custodian-mailer"
