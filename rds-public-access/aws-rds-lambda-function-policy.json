@@ -1,0 +1,47 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": [
+                "arn:aws:logs:*:*:log-group:/aws/lambda/custodian-disable-rds-public-accessibility:*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sqs:SendMessage"
+            ],
+            "Resource": [
+                "arn:aws:sqs:*:*:cloud-custodian-mailer"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "rds:ModifyDBInstance"
+            ],
+            "Resource": [
+                "arn:aws:rds:*:*:db:*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "tag:GetResources",
+                "rds:DescribeDBInstances",
+                "iam:ListAccountAliases"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "logs:CreateLogGroup",
+            "Resource": "arn:aws:logs:*:*:*"
+        }
+    ]
+}
