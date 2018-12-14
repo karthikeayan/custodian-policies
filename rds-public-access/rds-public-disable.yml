@@ -1,0 +1,32 @@
+policies:
+  - name: disable-rds-public-accessibility
+    description: |
+      Disable RDS Public Access
+    resource: rds
+    mode:
+      type: periodic
+      schedule: "rate(5 minutes)"
+      timeout: 300
+      role: arn:aws:iam::<account_id>:role/<role>
+    filters:
+      - PubliclyAccessible: true
+      - type: value
+        key: DBInstanceStatus
+        value: available
+    actions:
+      - type: set-public-access
+        state: false
+      - type: notify
+        template: default.html
+        priority_header: 1
+        subject: "RDS - Public Access Removed - [custodian {{ account }} - {{ region }}]"
+        violation_desc: |
+            "RDS Instance with public access found and the instane have been modified to remove public access."
+        action_desc: "Actions Taken: RDS Instance(s) public access removed. No further action needed"
+        to:
+          - resource-owner
+          - <to_email>
+        transport:
+            type: sqs
+            queue: https://sqs.us-east-1.amazonaws.com/<account_id>/cloud-custodian-mailer
+            region: us-east-1
