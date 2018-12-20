@@ -8,6 +8,10 @@ policies:
         - source: 's3.amazonaws.com'
           event: DeleteBucketPolicy
           ids: "requestParameters.bucketName"
+        - source: 's3.amazonaws.com'
+          event: PutBucketPolicy
+          ids: "requestParameters.bucketName"
+      role: arn:aws:iam::<account_id>:role/<role>
       role: arn:aws:iam::<account_id>:role/<role>
       timeout: 200
     description: |
